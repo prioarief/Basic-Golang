@@ -16,7 +16,45 @@ func main() {
 	// fmt.Println(getValue(2, 10))
 
 	// fmt.Println(calculate(5))
-	fmt.Println(sumMin(5, 2))
+	// fmt.Println(sumMin(5, 2))
+	// fmt.Println(variadicExample(2, 3, 4, 5, 6, 7, 8, 9, 10))
+
+	// FUNC CLOSURE
+	// var getMinMax = func(n []int) (int, int) {
+	// 	var min, max int
+	// 	for i, e := range n {
+	// 		switch {
+	// 		case i == 0:
+	// 			max, min = e, e
+	// 		case e > max:
+	// 			max = e
+	// 		case e < min:
+	// 			min = e
+	// 		}
+	// 	}
+	// 	return min, max
+	// }
+
+	// var numbers = []int{2, 3, 4, 3, 4, 2, 3}
+	// var min, max = getMinMax(numbers)
+	// fmt.Printf("data : %v\nmin  : %v\nmax  : %v\n", numbers, min, max)
+
+	// Immediately-Invoked Function Expression (IIFE) == langsung di eksekusi
+	var numbers = []int{2, 3, 0, 4, 3, 2, 0, 4, 2, 0, 3}
+
+	var newNumbers = func(min int) []int {
+		var r []int
+		for _, e := range numbers {
+			if e < min {
+				continue
+			}
+			r = append(r, e)
+		}
+		return r
+	}(3)
+
+	fmt.Println("original number :", numbers)
+	fmt.Println("filtered number :", newNumbers)
 }
 
 // func printMessage(message string, arr []string) {
@@ -52,3 +90,14 @@ func sumMin(a, b int) (value1 int, value2 int) {
 
 // func randomWithRange(min int, max int) int
 // func randomWithRange(min, max int) int
+
+// func variadic = params no limits
+// func variadicExample(value ...int) float64 {
+// 	var total = 0
+// 	for _, number := range value {
+// 		total += total + number
+// 	}
+
+// 	avg := float64(total) / float64(len(value))
+// 	return avg
+// }
