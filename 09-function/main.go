@@ -6,6 +6,8 @@ import (
 )
 
 func main() {
+	name, hobby := greeting("Prio Arief Gunawan", "Traveling")
+	fmt.Printf("my name is %v and my hobby is %v\n", name, hobby)
 	// var names = []string{"John", "Wick"}
 	// // printMessage("halo", names)
 	// fmt.Println(time.Now().Unix())
@@ -40,21 +42,21 @@ func main() {
 	// fmt.Printf("data : %v\nmin  : %v\nmax  : %v\n", numbers, min, max)
 
 	// Immediately-Invoked Function Expression (IIFE) == langsung di eksekusi
-	var numbers = []int{2, 3, 0, 4, 3, 2, 0, 4, 2, 0, 3}
+	// var numbers = []int{2, 3, 0, 4, 3, 2, 0, 4, 2, 0, 3}
 
-	var newNumbers = func(min int) []int {
-		var r []int
-		for _, e := range numbers {
-			if e < min {
-				continue
-			}
-			r = append(r, e)
-		}
-		return r
-	}(3)
+	// var newNumbers = func(min int) []int {
+	// 	var r []int
+	// 	for _, e := range numbers {
+	// 		if e < min {
+	// 			continue
+	// 		}
+	// 		r = append(r, e)
+	// 	}
+	// 	return r
+	// }(3)
 
-	fmt.Println("original number :", numbers)
-	fmt.Println("filtered number :", newNumbers)
+	// fmt.Println("original number :", numbers)
+	// fmt.Println("filtered number :", newNumbers)
 }
 
 // func printMessage(message string, arr []string) {
@@ -83,6 +85,12 @@ func sumMin(a, b int) (value1 int, value2 int) {
 	value2 = a - b
 
 	return
+}
+
+func greeting(name, hobby string) (myname string, myhobby string) {
+	myname = name
+	myhobby = hobby
+	return myname, myhobby
 }
 
 // func nameOfFunc(paramA type, paramB type, paramC type) returnType
