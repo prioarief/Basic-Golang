@@ -3,11 +3,13 @@ package main
 import (
 	"fmt"
 	"math"
+	"reflect"
+	"strings"
 )
 
 func main() {
-	name, hobby := greeting("Prio Arief Gunawan", "Traveling")
-	fmt.Printf("my name is %v and my hobby is %v\n", name, hobby)
+	// name, hobby := greeting("Prio Arief Gunawan", "Traveling")
+	// fmt.Printf("my name is %v and my hobby is %v\n", name, hobby)
 	// var names = []string{"John", "Wick"}
 	// // printMessage("halo", names)
 	// fmt.Println(time.Now().Unix())
@@ -57,6 +59,34 @@ func main() {
 
 	// fmt.Println("original number :", numbers)
 	// fmt.Println("filtered number :", newNumbers)
+	// variadic := variadicExample(2, 2, 2, 2)
+	// fmt.Println(variadic)
+
+	// numbers := []int{2, 3, 4, 3, 2, 5}
+	// max := 3
+	// var dataLength, getNumbers = findMax(numbers, max)
+	// theNumbers := getNumbers()
+	// fmt.Println(dataLength)
+	// fmt.Println(theNumbers)
+	// min, max := getMinMax(numbers)
+	// fmt.Println(min, max)
+
+	data := []string{"wick", "jason", "ethan", "arief", "prio"}
+	dataContainsO := filterData(data, func(each string) bool {
+		return strings.Contains(each, "o")
+	})
+
+	dataWithLength5 := filterData(data, func(each string) bool {
+		return len(each) == 5
+	})
+
+	fmt.Println(reflect.TypeOf(data))
+	fmt.Println(dataContainsO)
+	fmt.Println(dataWithLength5)
+
+	name := "Prio Arief Gunawan"
+	fmt.Println(reflect.TypeOf(name).String() == "string")
+	// fmt.Println(strings.ToUpper(name))
 }
 
 // func printMessage(message string, arr []string) {
@@ -100,12 +130,56 @@ func greeting(name, hobby string) (myname string, myhobby string) {
 // func randomWithRange(min, max int) int
 
 // func variadic = params no limits
-// func variadicExample(value ...int) float64 {
-// 	var total = 0
-// 	for _, number := range value {
-// 		total += total + number
-// 	}
+func variadicExample(value ...int) float64 {
+	var total = 0
+	for _, number := range value {
+		total += number
+	}
 
-// 	avg := float64(total) / float64(len(value))
-// 	return avg
-// }
+	avg := float64(total) / float64(len(value))
+	return avg
+}
+
+// closure = anonymous function
+var getMinMax = func(n []int) (int, int) {
+	var min, max int
+	for i, e := range n {
+		switch {
+		case i == 0:
+			max, min = e, e
+
+		case e > max:
+			max = e
+
+		case e < min:
+			min = e
+		}
+	}
+
+	return min, max
+}
+
+// closure as return function
+func findMax(numbers []int, max int) (int, func() []int) {
+	var res []int
+	for _, e := range numbers {
+		if e <= max {
+			res = append(res, e)
+		}
+	}
+	return len(res), func() []int {
+		return res
+	}
+}
+
+// function as parameter
+func filterData(data []string, callback func(string) bool) []string {
+	var result []string
+	for _, each := range data {
+		if filtered := callback(each); filtered {
+			result = append(result, each)
+		}
+	}
+
+	return result
+}
