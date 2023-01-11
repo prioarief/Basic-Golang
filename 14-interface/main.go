@@ -1,54 +1,40 @@
 package main
 
-import (
-	"fmt"
-	"math"
-)
+import "fmt"
 
-type hitung interface {
-	luas() float64
-	keliling() float64
+type HasName interface {
+	GetName() string
 }
 
-type lingkaran struct {
-	diameter float64
+func SayHello(hasName HasName) {
+	fmt.Println("Hello", hasName.GetName())
 }
 
-func (l lingkaran) jariJari() float64 {
-	return l.diameter / 2
+type Person struct {
+	Name string
 }
 
-func (l lingkaran) luas() float64 {
-	return math.Pi * math.Pow(l.jariJari(), 2)
+type Animal struct {
+	Name string
 }
 
-func (l lingkaran) keliling() float64 {
-	return math.Pi * l.diameter
+func (p Person) GetName() string {
+	return p.Name
 }
 
-type persegi struct {
-	sisi float64
-}
-
-func (p persegi) luas() float64 {
-	return math.Pow(p.sisi, 2)
-}
-
-func (p persegi) keliling() float64 {
-	return p.sisi * 4
+func (a Animal) GetName() string {
+	return a.Name
 }
 
 func main() {
-	var bangunDatar hitung
-	bangunDatar = persegi{10.0}
+	var p1 = Person{Name: "Mbappe"}
 
-	fmt.Println("=== Persegi ===")
-	fmt.Println("Luas : ", bangunDatar.luas())
-	fmt.Println("Keliling : ", bangunDatar.keliling())
+	// p1 (Person) bisa di pass ke fungsi SayHello jika Person implement kontrak interface hasName yang mempunyai fungsi GetName
+	// dan return valuenya string
+	SayHello(p1)
 
-	bangunDatar = lingkaran{14.0}
-	fmt.Println("=== Lingkaran ===")
-	fmt.Println("Luas : ", bangunDatar.luas())
-	fmt.Println("Keliling : ", bangunDatar.keliling())
-	fmt.Println("Jari-jari : ", bangunDatar.(lingkaran).jariJari())
+	// cat (Animal) bisa di pass ke fungsi SayHello jika Animal implement kontrak interface hasName yang mempunyai fungsi GetName
+	// dan return valuenya string
+	var cat = Animal{Name: "Cat"}
+	SayHello(cat)
 }
