@@ -20,6 +20,11 @@ func main() {
 	fmt.Println(*numberD)
 	fmt.Println(numberB)
 	fmt.Println(numberC)
+
+	// variabel biasa bisa diambil nilai pointernya, caranya dengan menambahkan tanda ampersand (&) tepat sebelum nama variabel. Metode ini disebut dengan referencing.
+
+	// Dan sebaliknya, nilai asli variabel pointer juga bisa diambil, dengan cara menambahkan tanda asterisk (*) tepat sebelum nama variabel. Metode ini disebut dengan dereferencing.
+
 	// =============================================================
 	// = mengambil nilai pointer dari variable asli menggunakan &  =
 	// = mengambil nilai asli dari pointer menggunakan *		   =
