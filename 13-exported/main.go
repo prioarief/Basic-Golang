@@ -7,6 +7,7 @@ import (
 
 func main() {
 	fmt.Println("Hello")
+	fmt.Println(helper.Version)
 	helper.SayHello()
 
 }
